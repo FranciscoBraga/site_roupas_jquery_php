@@ -8,6 +8,7 @@ class RoupaServices
     public function __construct(Connection $conn, RoupaModels $model){
         $this->conn = $conn->conectar();
         $this->model = $model;
+      
     }
     
     public function insert()
@@ -33,7 +34,7 @@ class RoupaServices
         $stms->bindValue(':id',$this->model->__get('id'));
         $stms->execute();
 
-        return this;
+        return $this;
     }
     public function delete(){
         $query = "delete from roupas where id = :id";
@@ -41,20 +42,26 @@ class RoupaServices
         $stms->bindValue(':id',$this->model->__get('id'));
         $stms->execute();
 
-        return this;
+        return $this;
     }
+
     public function getAll(){
-        $query = "select id,numero,tipo,cor,vestimenta,moda,marca from roupas";
+        
+        $query = "select id,numero,tipo,cor,vestimenta,moda,marca, imagem from roupas";
         $stms= $this->conn->prepare($query);
         $stms->execute();
 
-        return this;
+        return $stms->fetchAll(PDO::FETCH_OBJ);
+
+      
     }
     public function getId(){
         $query = "select id,numero,tipo,cor,vestimenta,moda,marca from roupas where id = :id";
         $stms= $this->conn->prepare($query);
         $stms->bindValue(':id',$this->model->__get('id'));
         $stms->execute();
+
+        return $stms->fetch();
     } 
     
     public function pathImage($name){

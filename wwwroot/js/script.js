@@ -9,5 +9,10 @@ $(document).ready(()=>{
     $("#cadastro_roupas").on('click',()=>{
         $("#pagina").load('cadastro/roupa.php')
     });
+
+    $("#lista_roupas").on('click', ()=>{
+        $("#pagina").load("lista/roupa.php")
+    });
+ 
 });
 
