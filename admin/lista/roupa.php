@@ -62,7 +62,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Remover Peça</button>
+        <button type="button" class="btn btn-primary" id="deletar">Remover Peça</button>
       </div>
     </div>
   </div>
@@ -78,6 +78,7 @@
                     success: dados => {
                       $('#vestimenta').html(dados.vestimenta+' '+dados.cor+''+dados.marca),
                       $('#imagem').attr('src','../wwwroot/img/'+dados.imagem),
+                      $('#deletar').val(dados.id),
                       console.log(dados)
                     },
                     error: erro => { alert('Erro ao cadastrar'+ erro)}
@@ -85,6 +86,29 @@
             })
 
   }
+
+ $('#deletar').on('click', e =>{
+
+   let id = $(e.target).val()
+        $.ajax({
+                    type:'GET',
+                    url:'../app/controllers/RoupaControllers.php',
+                    data: `id=${id}&valor=deletar`,
+                    dataType:'json',
+                    success: dados => {
+                     if(dados == false){
+                      /* $("#pagina").load("lista/roupa.php")
+                      alert('Peça Removida') */
+                     }
+                      
+                    },
+                    error: erro => { alert('Erro ao cadastrar'+ erro)}
+
+            })
+ })
+    
+
+  
 
 
   
