@@ -53,7 +53,7 @@
 
         // Create an FormData object 
         var dados = new FormData(document.getElementById('form_roupa'));
-        console.log(dados);
+        
         $.ajax({
                 type:"POST",
                 url:"../app/controllers/RoupaControllers.php",
@@ -61,7 +61,7 @@
                 data: dados,
                 processData: false,
                  contentType: false,
-                success: dados => { alert('cadastro realizado'+ dados)},
+                success: dados => { alert('cadastro realizado')},
                 error: dados => { alert('Erro ao cadastrar'+ erro)}
 
         });

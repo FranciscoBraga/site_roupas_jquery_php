@@ -42,7 +42,7 @@ class RoupaServices
         $stms->bindValue(':id',$this->model->__get('id'));
         $stms->execute();
 
-        return $this;
+        return $stms->fetch(PDO::FETCH_OBJ);;
     }
 
     public function getAll(){
@@ -56,12 +56,12 @@ class RoupaServices
       
     }
     public function getId(){
-        $query = "select id,numero,tipo,cor,vestimenta,moda,marca from roupas where id = :id";
+        $query = "select id,numero,tipo,cor,vestimenta,moda,marca,imagem from roupas where id = :id";
         $stms= $this->conn->prepare($query);
         $stms->bindValue(':id',$this->model->__get('id'));
         $stms->execute();
 
-        return $stms->fetch();
+        return $stms->fetch(PDO::FETCH_OBJ);
     } 
     
     public function pathImage($name){

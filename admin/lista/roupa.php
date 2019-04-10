@@ -35,32 +35,30 @@
           <button class="btn btn-warning"><i class="fas fa-edit"></i></button>
         </td>
         <td>
-         <form action="controllers/AdminRoupaControllers.php" method="get" >
-            <input type="hidden" name="id" value="<?= $value->id?>">
-            <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"  ><i class="fas fa-trash"></i></button>
-         </form>
+            <button class="btn btn-danger" type="button"  data-toggle="modal" data-target="#exampleModal"  onclick="GetId(<?= $value->id?>)" value="<?= $value->id?>"><i class="fas fa-trash"></i></button>
+         
         </td>
       </tr>
       <?php }?> 
     </tbody>          
 </table>
-<?
-    if(!$retorno == null){
-     print_r($retorno);
-  }
-  ?>
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
       </div>
       <div class="modal-body">
-        ...
+          <h3 class='float-left d-inline' id="vestimenta">?</h3>
+          <div>
+            <img id="imagem" src="" alt="" class="img-fluid">
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -69,3 +67,27 @@
     </div>
   </div>
 </div>
+<script>
+   //formulário de cadastro de roupas
+  function GetId(id){
+    $.ajax({
+                    type:'GET',
+                    url:'../app/controllers/RoupaControllers.php',
+                    data: `id=${id}&valor=busca`,
+                    dataType:'json',
+                    success: dados => {
+                      $('#vestimenta').html(dados.vestimenta+' '+dados.cor+''+dados.marca),
+                      $('#imagem').attr('src','../wwwroot/img/'+dados.imagem),
+                      console.log(dados)
+                    },
+                    error: erro => { alert('Erro ao cadastrar'+ erro)}
+
+            })
+
+  }
+
+
+  
+</script>
+
+

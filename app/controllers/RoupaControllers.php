@@ -8,9 +8,23 @@ $roupa = new RoupaModels();
 $conn = new Connection();
 $services = new RoupaServices($conn, $roupa);
 
-echo json_encode($_POST);
+if($_GET['valor'] == 'busca'){
+ 
 
-if($_POST != null){
+  $roupa->__set('id',$_GET['id']);
+  $retorno = $services->getId();
+
+  echo json_encode($retorno);
+
+ }
+
+if($_GET['valor'] =='deletar'){
+  $roupa->__set('id',$_GET['id']);
+  $retorno = $services->delete();
+  echo json_encode($retorno);
+}
+
+if(!$_POST == null){
 
  $roupa->__set('numero',$_POST['numero']);
  $roupa->__set('tipo',$_POST['tipo']);
@@ -26,7 +40,7 @@ if($_POST != null){
     $services->pathImage($_FILES['imagem']['tmp_name']);
   }
 
-  print_r($retorno);
+ 
 }
 
 

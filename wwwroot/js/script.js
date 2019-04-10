@@ -12,7 +12,8 @@ $(document).ready(()=>{
 
     $("#lista_roupas").on('click', ()=>{
         $("#pagina").load("lista/roupa.php")
-    });
+    });   
+
  
 });
 
